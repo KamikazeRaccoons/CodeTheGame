@@ -152,7 +152,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Level1.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="Player.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Level1.h" />
+    <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="Player.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\RaccoonGameLibrary\RGL\RGL.vcxproj">
+      <Project>{44f38ce6-53ca-462f-a204-461814463ea9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\RaccoonPythonLibrary\RaccoonPythonLibrary\RPL\RPL.vcxproj">
+      <Project>{86c1417d-79d3-41f6-9b3d-28692d764b09}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
