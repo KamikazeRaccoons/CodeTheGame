@@ -8,15 +8,17 @@
 
 int main(int argc, char** argv)
 {
-	rpl::Interpreter::getInstance()->initialize();
-
-	rgl::ObjectFactory::get()->registerType("Player", std::make_shared<PlayerCreator>());
-
-	if (!rgl::Game::get()->run("Code: The Game", 640, 480, std::make_shared<Level1>(), true))
+	if (!rgl::Game::get()->init("Code: The Game", 640, 480, true))
 	{
 		rgl::Debugger::get()->log("Could not run game.", rgl::Debugger::FATAL_ERROR);
 		::system("PAUSE");
 	}
+
+	rpl::Interpreter::getInstance()->initialize();
+
+	rgl::ObjectFactory::get()->registerType("Player", std::make_shared<PlayerCreator>());
+
+	rgl::Game::get()->run(std::make_shared<MainMenu>());
 
 	return 0;
 }

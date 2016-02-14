@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="4">
+ <properties>
+  <property name="ExitButton" value="gui/exit.png"/>
+  <property name="OptionsButton" value="gui/opt.png"/>
+  <property name="PlayButton" value="gui/play.png"/>
+ </properties>
+ <objectgroup name="GUI">
+  <object id="1" name="PlayButton" type="Button" x="32" y="32" width="128" height="64">
+   <properties>
+    <property name="callbackID" value="0"/>
+    <property name="textureID" value="PlayButton"/>
+   </properties>
+  </object>
+  <object id="2" name="OptionsButton" type="Button" x="32" y="128" width="128" height="64">
+   <properties>
+    <property name="callbackID" value="1"/>
+    <property name="textureID" value="OptionsButton"/>
+   </properties>
+  </object>
+  <object id="3" name="ExitButton" type="Button" x="32" y="224" width="128" height="64">
+   <properties>
+    <property name="callbackID" value="2"/>
+    <property name="textureID" value="ExitButton"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
