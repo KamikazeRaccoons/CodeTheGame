@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="3">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="4">
  <properties>
   <property name="Player" value="entities/Player.png"/>
+  <property name="RunButton" value="gui/run.png"/>
+  <property name="gravity" value="19.62"/>
  </properties>
  <tileset firstgid="1" name="terrain" tilewidth="32" tileheight="32" tilecount="27">
   <image source="terrain.png" width="288" height="96"/>
@@ -18,6 +20,14 @@
   <object id="1" name="MainPlayer" type="Player" x="32" y="416" width="32" height="32">
    <properties>
     <property name="textureID" value="Player"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="GUI Objects">
+  <object id="3" name="RunButton" type="Button" x="544" y="384" width="64" height="32">
+   <properties>
+    <property name="callbackID" value="0"/>
+    <property name="textureID" value="RunButton"/>
    </properties>
   </object>
  </objectgroup>

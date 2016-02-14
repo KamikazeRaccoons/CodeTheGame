@@ -1,0 +1,1 @@
+MainPlayer.setDirection("RIGHT");

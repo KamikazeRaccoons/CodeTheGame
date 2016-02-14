@@ -6,7 +6,22 @@ class Player : public rgl::PhysicsObject
 {
 private:
 
+	enum PlayerDirection
+	{
+		LEFT = 0,
+		RIGHT = 1
+	} m_currentDirection = RIGHT;
+
+	enum PlayerState
+	{
+		STANDING = 0,
+		WALKING = 1,
+		JUMPING = 2
+	} m_currentState = STANDING;
+
 	Animator m_animator;
+
+	void setState(PlayerState state, PlayerDirection direction);
 
 public:
 
@@ -18,6 +33,10 @@ public:
 
 	virtual void update();
 	virtual void draw();
+
+	static void registerPythonClass();
+
+	void pySetDirection(std::string direction);
 };
 
 class PlayerCreator : public rgl::ObjectCreator
