@@ -24,6 +24,8 @@ private:
 
 	void setState(PlayerState state, PlayerDirection direction);
 
+	std::vector<rgl::PhysicsObject*> m_collidingObjects;
+
 public:
 
 	Player(int x, int y, int width, int height, std::string textureID, std::string name = "(unnamed Player)") :
@@ -36,11 +38,15 @@ public:
 	virtual void draw();
 
 	virtual void onBeginContact(rgl::Vector2 contactPosition, PhysicsObject* pPhysicsObject);
+	virtual void onEndContact(rgl::Vector2 contactPosition, PhysicsObject* pPhysicsObject);
 
 	static void registerPythonClass();
 
 	void pySetDirection(std::string direction);
 	void pyJump();
+	bool pyIsTileRelativeToPlayer(int relative_x, int relative_y);
+	bool pyCollisionWithObject();
+	std::string pyGetDirection();
 };
 
 class PlayerCreator : public rgl::ObjectCreator

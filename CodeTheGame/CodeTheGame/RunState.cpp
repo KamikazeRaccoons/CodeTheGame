@@ -39,7 +39,7 @@ void RunState::onExit()
 
 void RunState::update()
 {
-	rgl::Debugger::get()->log(rpl::Interpreter::get()->execute(m_updateScript, false));
+	rpl::Interpreter::get()->execute(m_updateScript, false);
 
 	m_pLevel->update();
 }
