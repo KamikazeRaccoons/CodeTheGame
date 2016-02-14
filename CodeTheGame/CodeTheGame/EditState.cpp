@@ -26,9 +26,6 @@ void EditState::onExit()
 
 void EditState::update()
 {
-	if (rgl::InputHandler::get()->isKeyDown(SDL_SCANCODE_RETURN))
-		rgl::Game::get()->getGameStateMachine()->changeState(std::make_shared<EditState>());
-
 	m_pLevel->update();
 }
 

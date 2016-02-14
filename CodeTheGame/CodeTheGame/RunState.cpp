@@ -2,6 +2,7 @@
 #include "MainMenu.h"
 #include "EditState.h"
 #include "Player.h"
+#include "LevelPassed.h"
 #include <RPL.h>
 
 void RunState::onEnter()
@@ -26,7 +27,7 @@ void RunState::onEnter()
 	m_pLevel->addCallback(std::bind(&RunState::onBackButton, this));
 
 	m_pLevel->update();
-	rpl::Interpreter::get()->execute(m_initScript, false);
+	rgl::Debugger::get()->log(rpl::Interpreter::get()->execute(m_initScript, false));
 }
 
 void RunState::onExit()
@@ -38,10 +39,7 @@ void RunState::onExit()
 
 void RunState::update()
 {
-	if (rgl::InputHandler::get()->isKeyDown(SDL_SCANCODE_RETURN))
-		rgl::Game::get()->getGameStateMachine()->changeState(std::make_shared<RunState>());
-
-	rpl::Interpreter::get()->execute(m_updateScript, false);
+	rgl::Debugger::get()->log(rpl::Interpreter::get()->execute(m_updateScript, false));
 
 	m_pLevel->update();
 }

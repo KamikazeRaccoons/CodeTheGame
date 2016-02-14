@@ -1,4 +1,6 @@
 #include "Player.h"
+#include "Flag.h"
+#include "LevelPassed.h"
 #include <RPL.h>
 
 void Player::onCreate()
@@ -31,15 +33,6 @@ void Player::update()
 {
 	rgl::PhysicsObject::update();
 
-	bool shouldJump = rgl::InputHandler::get()->isKeyDown(SDL_SCANCODE_UP) && m_pLevel->isTileAt((int)m_pLevel->toTileUnits(m_x), (int)m_pLevel->toTileUnits(m_y + 1) + 1);
-
-	//if (rgl::InputHandler::get()->isKeyDown(SDL_SCANCODE_LEFT))
-	//	setState(shouldJump ? JUMPING : WALKING, LEFT);
-	//else if (rgl::InputHandler::get()->isKeyDown(SDL_SCANCODE_RIGHT))
-	//	setState(shouldJump ? JUMPING : WALKING, RIGHT);
-	//else
-	//	setState(shouldJump ? JUMPING : STANDING, m_currentDirection);
-
 	if (m_currentState != STANDING)
 	{
 		switch (m_currentDirection)
@@ -69,6 +62,15 @@ void Player::draw()
 	rect.y = m_y + 32;
 	rect.w = 32;
 	rect.h = 32;
+}
+
+void Player::onBeginContact(rgl::Vector2 contactPosition, PhysicsObject* pPhysicsObject)
+{
+	if (pPhysicsObject != 0 && dynamic_cast<Flag*>(pPhysicsObject) && !m_levelComplete)
+	{
+		m_levelComplete = true;
+		m_pLevel->addObject(std::make_shared<LevelPassed>(464, 55, "LevelPassedObject"));
+	}
 }
 
 void Player::registerPythonClass()
@@ -110,9 +112,6 @@ void Player::setState(PlayerState state, PlayerDirection direction)
 		case Player::WALKING:
 			m_animator.setAnimation(4, 0.15f);
 			break;
-		case Player::JUMPING:
-			m_pBody->SetLinearVelocity(b2Vec2(m_pBody->GetLinearVelocity().x, -12.0f));
-			break;
 		}
 		break;
 	case RIGHT:
@@ -124,9 +123,6 @@ void Player::setState(PlayerState state, PlayerDirection direction)
 			break;
 		case Player::WALKING:
 			m_animator.setAnimation(4, 0.15f);
-			break;
-		case Player::JUMPING:
-			m_pBody->SetLinearVelocity(b2Vec2(m_pBody->GetLinearVelocity().x, -12.0f));
 			break;
 		}
 		break;

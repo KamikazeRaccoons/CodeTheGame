@@ -153,6 +153,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="EditState.cpp" />
+    <ClCompile Include="Flag.cpp" />
+    <ClCompile Include="LevelPassed.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -160,6 +162,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EditState.h" />
+    <ClInclude Include="Flag.h" />
+    <ClInclude Include="LevelPassed.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RunState.h" />
