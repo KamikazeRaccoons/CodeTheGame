@@ -11,12 +11,14 @@ private:
 	std::string m_initScript;
 	std::string m_updateScript;
 
+	int m_levelNumber;
+
 	void onCancelButton();
 	void onBackButton();
 
 public:
 
-	RunState() { }
+	RunState(int levelNumber) : m_levelNumber(levelNumber) { }
 
 	virtual void onEnter();
 	virtual void onExit();

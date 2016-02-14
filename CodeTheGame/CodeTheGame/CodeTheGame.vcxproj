@@ -154,6 +154,7 @@
   <ItemGroup>
     <ClCompile Include="EditState.cpp" />
     <ClCompile Include="Flag.cpp" />
+    <ClCompile Include="Label.cpp" />
     <ClCompile Include="LevelPassed.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
@@ -163,6 +164,7 @@
   <ItemGroup>
     <ClInclude Include="EditState.h" />
     <ClInclude Include="Flag.h" />
+    <ClInclude Include="Label.h" />
     <ClInclude Include="LevelPassed.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Player.h" />

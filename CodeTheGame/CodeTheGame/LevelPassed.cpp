@@ -1,5 +1,6 @@
 #include "LevelPassed.h"
 #include "MainMenu.h"
+#include "EditState.h"
 
 void LevelPassed::onCreate()
 {
@@ -19,7 +20,12 @@ void LevelPassed::update()
 	m_velocity.setY((rgl::Game::get()->getHeight() / 2 - (m_position.getY() + m_height / 2)) * 0.1);
 
 	if (--m_timeLeft < 0)
-		rgl::Game::get()->getGameStateMachine()->changeState(std::make_shared<MainMenu>());
+	{
+		if (rgl::FileIO::fileExists("assets/levels/level" + std::to_string(m_nextLevel) + "/level" + std::to_string(m_nextLevel) + ".tmx"))
+			rgl::Game::get()->getGameStateMachine()->changeState(std::make_shared<EditState>(m_nextLevel));
+		else
+			rgl::Game::get()->getGameStateMachine()->changeState(std::make_shared<MainMenu>());
+	}
 
 	rgl::SimpleActor::update();
 }

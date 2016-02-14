@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="8">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="7">
  <properties>
   <property name="BackButton" value="gui/back.png"/>
   <property name="CancelButton" value="gui/cancel.png"/>
   <property name="Flag" value="entities/flag.png"/>
+  <property name="InitOn" value="gui/init.png"/>
   <property name="LevelPassed" value="gui/levelPassed.png"/>
   <property name="Player" value="entities/Player.png"/>
   <property name="RunButton" value="gui/run.png"/>
+  <property name="UpdateOn" value="gui/update.png"/>
   <property name="gravity" value="19.62"/>
  </properties>
- <tileset firstgid="1" name="terrain" tilewidth="32" tileheight="32" tilecount="27" columns="9">
+ <tileset firstgid="1" name="terrain" tilewidth="32" tileheight="32" tilecount="27">
   <image source="terrain.png" width="288" height="96"/>
  </tileset>
  <layer name="Interactive Tiles" width="20" height="15">
@@ -17,12 +19,13 @@
    <property name="interactive" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjALSgCCR6liojAEZyABi
+   eJxjYBgFo2AUjALaABYqYwAR0ABR
   </data>
  </layer>
  <objectgroup name="Dynamic Objects">
-  <object id="1" name="MainPlayer" type="Player" x="32" y="416" width="32" height="32">
+  <object id="1" name="player" type="Player" x="32" y="416" width="32" height="32">
    <properties>
+    <property name="currentLevel" value="1"/>
     <property name="textureID" value="Player"/>
    </properties>
   </object>

@@ -1,19 +1,25 @@
 #include "EditState.h"
 #include "Player.h"
+#include "Label.h"
 #include "MainMenu.h"
 #include "RunState.h"
 #include <RPL.h>
-#include <fstream>
 
 void EditState::onEnter()
 {
-	m_initScript = rgl::FileIO::readFile("assets/scripts/init.py");
-	m_updateScript = rgl::FileIO::readFile("assets/scripts/update.py");
-	
-	m_pLevel = rgl::LevelParser::parseLevel("assets/levels/level1/", "level1.tmx");
+	m_pLevel = rgl::LevelParser::parseLevel("assets/levels/level" + std::to_string(m_levelNumber) + "/", "level" + std::to_string(m_levelNumber) + ".tmx");
 
 	m_pLevel->addObject(std::make_shared<rgl::Button>(544, 384, 64, 32, "RunButton", 0, "RunButton"));
 	m_pLevel->addObject(std::make_shared<rgl::Button>(544, 32, 64, 32, "BackButton", 1, "BackButton"));
+
+	m_pLevel->addObject(m_pInitTextBox = std::make_shared<rgl::TextBox>(false, 0, 0, 384, 224, 127, 127, 127, 191, "Consola", "InitEditor"));
+	m_pInitTextBox->setText(rgl::FileIO::readFile("assets/scripts/init.py"));
+
+	m_pLevel->addObject(m_pUpdateTextBox = std::make_shared<rgl::TextBox>(false, 0, 256, 384, 224, 127, 127, 127, 191, "Consola", "UpdateEditor"));
+	m_pUpdateTextBox->setText(rgl::FileIO::readFile("assets/scripts/update.py"));
+
+	m_pLevel->addObject(std::make_shared<Label>(320, 0, 64, 32, "InitOn", "InitLabel"));
+	m_pLevel->addObject(std::make_shared<Label>(320, 256, 64, 32, "UpdateOn", "UpdateLabel"));
 
 	m_pLevel->addCallback(std::bind(&EditState::onRunButton, this));
 	m_pLevel->addCallback(std::bind(&EditState::onBackButton, this));
@@ -44,10 +50,16 @@ std::string EditState::getStateID() const
 
 void EditState::onRunButton()
 {
-	rgl::Game::get()->getGameStateMachine()->changeState(std::make_shared<RunState>());
+	rgl::FileIO::writeFile("assets/scripts/init.py", m_pInitTextBox->getText());
+	rgl::FileIO::writeFile("assets/scripts/update.py", m_pUpdateTextBox->getText());
+
+	rgl::Game::get()->getGameStateMachine()->changeState(std::make_shared<RunState>(m_levelNumber));
+
+	rgl::SoundManager::get()->playSound("MenuBoop", 0);
 }
 
 void EditState::onBackButton()
 {
 	rgl::Game::get()->getGameStateMachine()->changeState(std::make_shared<MainMenu>());
+	rgl::SoundManager::get()->playSound("MenuBoop", 0);
 }

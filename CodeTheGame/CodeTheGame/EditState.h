@@ -8,15 +8,17 @@ private:
 
 	std::shared_ptr<rgl::Level> m_pLevel;
 
-	std::string m_initScript;
-	std::string m_updateScript;
+	std::shared_ptr<rgl::TextBox> m_pInitTextBox;
+	std::shared_ptr<rgl::TextBox> m_pUpdateTextBox;
+
+	int m_levelNumber;
 
 	void onRunButton();
 	void onBackButton();
 
 public:
 
-	EditState() { }
+	EditState(int levelNumber) : m_levelNumber(levelNumber) { }
 
 	virtual void onEnter();
 	virtual void onExit();

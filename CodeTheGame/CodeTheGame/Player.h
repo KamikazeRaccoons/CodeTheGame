@@ -21,15 +21,14 @@ private:
 	Animator m_animator;
 
 	bool m_levelComplete;
+	int m_currentLevel;
 
 	void setState(PlayerState state, PlayerDirection direction);
 
-	std::vector<rgl::PhysicsObject*> m_collidingObjects;
-
 public:
 
-	Player(int x, int y, int width, int height, std::string textureID, std::string name = "(unnamed Player)") :
-		rgl::PhysicsObject(x, y, width, height, b2_dynamicBody, textureID, name), m_levelComplete(false) { }
+	Player(int x, int y, int width, int height, int currentLevel, std::string textureID, std::string name = "(unnamed Player)") :
+		rgl::PhysicsObject(x, y, width, height, b2_dynamicBody, textureID, name), m_levelComplete(false), m_currentLevel(currentLevel) { }
 
 	virtual void onCreate();
 	virtual void onDestroy();
@@ -38,15 +37,12 @@ public:
 	virtual void draw();
 
 	virtual void onBeginContact(rgl::Vector2 contactPosition, PhysicsObject* pPhysicsObject);
-	virtual void onEndContact(rgl::Vector2 contactPosition, PhysicsObject* pPhysicsObject);
 
 	static void registerPythonClass();
 
 	void pySetDirection(std::string direction);
 	void pyJump();
-	bool pyIsTileRelativeToPlayer(int relative_x, int relative_y);
-	bool pyCollisionWithObject();
-	std::string pyGetDirection();
+	bool pyRelativeBlockAt(int relative_x, int relative_y);
 };
 
 class PlayerCreator : public rgl::ObjectCreator
@@ -54,7 +50,7 @@ class PlayerCreator : public rgl::ObjectCreator
 	virtual std::shared_ptr<rgl::GameObject> createObject(const std::shared_ptr<rgl::ObjectParams> pObjectParams, std::string name) const
 	{
 		return std::make_shared<Player>(pObjectParams->getIntParam("x"), pObjectParams->getIntParam("y"),
-			pObjectParams->getIntParam("width"), pObjectParams->getIntParam("height"), pObjectParams->getStringParam("textureID"),
-			name);
+			pObjectParams->getIntParam("width"), pObjectParams->getIntParam("height"), pObjectParams->getIntParam("currentLevel"),
+			pObjectParams->getStringParam("textureID"), name);
 	}
 };

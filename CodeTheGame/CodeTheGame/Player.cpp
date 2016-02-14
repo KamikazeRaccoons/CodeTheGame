@@ -66,24 +66,12 @@ void Player::draw()
 
 void Player::onBeginContact(rgl::Vector2 contactPosition, PhysicsObject* pPhysicsObject)
 {
-	if (pPhysicsObject != 0 && !m_levelComplete)
+	if (pPhysicsObject != 0 && dynamic_cast<Flag*>(pPhysicsObject) && !m_levelComplete)
 	{
-		if (dynamic_cast<Flag*>(pPhysicsObject))
-		{
-			m_levelComplete = true;
-			m_pLevel->addObject(std::make_shared<LevelPassed>(464, 55, "LevelPassedObject"));
-		}
-		else
-		{
-			m_collidingObjects.push_back(pPhysicsObject);
-		}
-
+		m_levelComplete = true;
+		m_pLevel->addObject(std::make_shared<LevelPassed>(464, 55, m_currentLevel + 1, "LevelPassedObject"));
+		rgl::SoundManager::get()->playSound("FlagHit", 0);
 	}
-}
-
-void Player::onEndContact(rgl::Vector2 contactPosition, PhysicsObject* pPhysicsObject)
-{
-	std::remove(m_collidingObjects.begin(), m_collidingObjects.end(), pPhysicsObject);
 }
 
 void Player::registerPythonClass()
@@ -92,9 +80,7 @@ void Player::registerPythonClass()
 		boost::python::class_<Player>("Player", boost::python::no_init)
 		.def("setDirection", &Player::pySetDirection)
 		.def("jump", &Player::pyJump)
-		.def("isTileRelativeToPlayer", &Player::pyIsTileRelativeToPlayer)
-		.def("collisionWithObject", &Player::pyCollisionWithObject)
-		.def("getDirection", &Player::pyGetDirection));
+		.def("relativeBlockAt", &Player::pyRelativeBlockAt));
 }
 
 void Player::pySetDirection(std::string direction)
@@ -108,22 +94,16 @@ void Player::pySetDirection(std::string direction)
 void Player::pyJump()
 {
 	if (m_pLevel->isTileAt((int)m_pLevel->toTileUnits(m_x), (int)m_pLevel->toTileUnits(m_y + 1) + 1))
+	{
 		m_pBody->SetLinearVelocity(b2Vec2(m_pBody->GetLinearVelocity().x, -12.0f));
+		rgl::SoundManager::get()->playSound("PlayerJump", 0);
+	}
 }
 
-bool Player::pyIsTileRelativeToPlayer(int relative_x, int relative_y)
+bool Player::pyRelativeBlockAt(int relative_x, int relative_y)
 {
-	return m_pLevel->isTileAt((int)m_pLevel->toTileUnits(m_x + relative_x * m_pLevel->getTileSize() + m_pLevel->getTileSize() / 2), (int)m_pLevel->toTileUnits(m_y + relative_y * m_pLevel->getTileSize() + m_pLevel->getTileSize() / 2));
-}
-
-bool Player::pyCollisionWithObject()
-{
-	return m_collidingObjects.size() > 0;
-}
-
-std::string Player::pyGetDirection()
-{
-	return m_currentDirection == LEFT ? "LEFT" : "RIGHT";
+	return m_pLevel->isTileAt((int)m_pLevel->toTileUnits(m_x + relative_x * m_pLevel->getTileSize() + m_pLevel->getTileSize() / 2),
+		(int)m_pLevel->toTileUnits(m_y + relative_y * m_pLevel->getTileSize() + m_pLevel->getTileSize() / 2));
 }
 
 void Player::setState(PlayerState state, PlayerDirection direction)
