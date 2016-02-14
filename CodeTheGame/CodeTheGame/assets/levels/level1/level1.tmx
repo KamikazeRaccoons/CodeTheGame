@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="4">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="6">
  <properties>
+  <property name="BackButton" value="gui/back.png"/>
+  <property name="CancelButton" value="gui/cancel.png"/>
   <property name="Player" value="entities/Player.png"/>
   <property name="RunButton" value="gui/run.png"/>
   <property name="gravity" value="19.62"/>
@@ -23,12 +25,5 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="GUI Objects">
-  <object id="3" name="RunButton" type="Button" x="544" y="384" width="64" height="32">
-   <properties>
-    <property name="callbackID" value="0"/>
-    <property name="textureID" value="RunButton"/>
-   </properties>
-  </object>
- </objectgroup>
+ <objectgroup name="GUI Objects"/>
 </map>

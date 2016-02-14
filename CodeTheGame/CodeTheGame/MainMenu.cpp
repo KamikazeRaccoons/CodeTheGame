@@ -1,5 +1,5 @@
 #include "MainMenu.h"
-#include "Level1.h"
+#include "EditState.h"
 
 void MainMenu::onEnter()
 {
@@ -21,7 +21,7 @@ void MainMenu::update()
 
 void MainMenu::render()
 {
-	SDL_SetRenderDrawColor(rgl::Game::get()->getRenderer(), 127, 127, 127, 255);
+	SDL_SetRenderDrawColor(rgl::Game::get()->getRenderer(), 0, 0, 0, 255);
 	SDL_RenderClear(rgl::Game::get()->getRenderer());
 
 	m_pLevel->render();
@@ -34,7 +34,7 @@ std::string MainMenu::getStateID() const
 
 void MainMenu::onPlayButton()
 {
-	rgl::Game::get()->getGameStateMachine()->changeState(std::make_shared<Level1>());
+	rgl::Game::get()->getGameStateMachine()->changeState(std::make_shared<EditState>());
 }
 
 void MainMenu::onOptionsButton()

@@ -37,6 +37,7 @@ public:
 	static void registerPythonClass();
 
 	void pySetDirection(std::string direction);
+	void pyJump();
 };
 
 class PlayerCreator : public rgl::ObjectCreator

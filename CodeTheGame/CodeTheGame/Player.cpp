@@ -75,7 +75,8 @@ void Player::registerPythonClass()
 {
 	rpl::Interpreter::get()->registerClass("Player",
 		boost::python::class_<Player>("Player", boost::python::no_init)
-		.def("setDirection", &Player::pySetDirection));
+		.def("setDirection", &Player::pySetDirection)
+		.def("jump", &Player::pyJump));
 }
 
 void Player::pySetDirection(std::string direction)
@@ -84,6 +85,12 @@ void Player::pySetDirection(std::string direction)
 		setState(WALKING, LEFT);
 	else if (direction == "RIGHT")
 		setState(WALKING, RIGHT);
+}
+
+void Player::pyJump()
+{
+	if (m_pLevel->isTileAt((int)m_pLevel->toTileUnits(m_x), (int)m_pLevel->toTileUnits(m_y + 1) + 1))
+		m_pBody->SetLinearVelocity(b2Vec2(m_pBody->GetLinearVelocity().x, -12.0f));
 }
 
 void Player::setState(PlayerState state, PlayerDirection direction)
@@ -97,16 +104,13 @@ void Player::setState(PlayerState state, PlayerDirection direction)
 		switch (state)
 		{
 		case Player::STANDING:
-			rgl::Debugger::get()->log("Standing");
 			m_pBody->SetLinearVelocity(b2Vec2(0.0f, m_pBody->GetLinearVelocity().y));
 			m_animator.setAnimation(0, 0.0f);
 			break;
 		case Player::WALKING:
-			rgl::Debugger::get()->log("Walking");
 			m_animator.setAnimation(4, 0.15f);
 			break;
 		case Player::JUMPING:
-			rgl::Debugger::get()->log("Jumping");
 			m_pBody->SetLinearVelocity(b2Vec2(m_pBody->GetLinearVelocity().x, -12.0f));
 			break;
 		}
@@ -115,16 +119,13 @@ void Player::setState(PlayerState state, PlayerDirection direction)
 		switch (state)
 		{
 		case Player::STANDING:
-			rgl::Debugger::get()->log("Standing");
 			m_pBody->SetLinearVelocity(b2Vec2(0.0f, m_pBody->GetLinearVelocity().y));
 			m_animator.setAnimation(0, 0.0f);
 			break;
 		case Player::WALKING:
-			rgl::Debugger::get()->log("Walking");
 			m_animator.setAnimation(4, 0.15f);
 			break;
 		case Player::JUMPING:
-			rgl::Debugger::get()->log("Jumping");
 			m_pBody->SetLinearVelocity(b2Vec2(m_pBody->GetLinearVelocity().x, -12.0f));
 			break;
 		}

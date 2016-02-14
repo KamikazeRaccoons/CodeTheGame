@@ -1,0 +1,70 @@
+#include "RunState.h"
+#include "MainMenu.h"
+#include "EditState.h"
+#include "Player.h"
+#include <RPL.h>
+
+void RunState::onEnter()
+{
+	m_initScript = rgl::FileIO::readFile("assets/scripts/init.py");
+	m_updateScript = rgl::FileIO::readFile("assets/scripts/update.py");
+
+	if (!rpl::Interpreter::get()->initialize())
+	{
+		rgl::Debugger::get()->log("Could not initialize interpreter.", rgl::Debugger::FATAL_ERROR);
+		return;
+	}
+
+	Player::registerPythonClass();
+
+	m_pLevel = rgl::LevelParser::parseLevel("assets/levels/level1/", "level1.tmx");
+
+	m_pLevel->addObject(std::make_shared<rgl::Button>(544, 384, 64, 32, "CancelButton", 0, "CancelButton"));
+	m_pLevel->addObject(std::make_shared<rgl::Button>(544, 32, 64, 32, "BackButton", 1, "BackButton"));
+
+	m_pLevel->addCallback(std::bind(&RunState::onCancelButton, this));
+	m_pLevel->addCallback(std::bind(&RunState::onBackButton, this));
+
+	m_pLevel->update();
+	rpl::Interpreter::get()->execute(m_initScript, false);
+}
+
+void RunState::onExit()
+{
+	rpl::Interpreter::get()->reset();
+
+	m_pLevel->clean();
+}
+
+void RunState::update()
+{
+	if (rgl::InputHandler::get()->isKeyDown(SDL_SCANCODE_RETURN))
+		rgl::Game::get()->getGameStateMachine()->changeState(std::make_shared<RunState>());
+
+	rpl::Interpreter::get()->execute(m_updateScript, false);
+
+	m_pLevel->update();
+}
+
+void RunState::render()
+{
+	SDL_SetRenderDrawColor(rgl::Game::get()->getRenderer(), 0, 191, 255, 255);
+	SDL_RenderClear(rgl::Game::get()->getRenderer());
+
+	m_pLevel->render();
+}
+
+std::string RunState::getStateID() const
+{
+	return "MainMenu";
+}
+
+void RunState::onCancelButton()
+{
+	rgl::Game::get()->getGameStateMachine()->changeState(std::make_shared<EditState>());
+}
+
+void RunState::onBackButton()
+{
+	rgl::Game::get()->getGameStateMachine()->changeState(std::make_shared<MainMenu>());
+}

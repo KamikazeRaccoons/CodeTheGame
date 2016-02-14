@@ -2,6 +2,7 @@
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="4">
  <properties>
   <property name="ExitButton" value="gui/exit.png"/>
+  <property name="MenuBackground" value="gui/title.png"/>
   <property name="OptionsButton" value="gui/opt.png"/>
   <property name="PlayButton" value="gui/play.png"/>
  </properties>
@@ -25,4 +26,12 @@
    </properties>
   </object>
  </objectgroup>
+ <imagelayer name="Background Layer" x="160">
+  <image source="gui/title.png"/>
+  <properties>
+   <property name="height" value="480"/>
+   <property name="textureID" value="MenuBackground"/>
+   <property name="width" value="480"/>
+  </properties>
+ </imagelayer>
 </map>

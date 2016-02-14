@@ -1,1 +1,1 @@
-MainPlayer.setDirection("RIGHT");
+MainPlayer.jump()

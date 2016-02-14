@@ -152,15 +152,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Level1.cpp" />
+    <ClCompile Include="EditState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RunState.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Level1.h" />
+    <ClInclude Include="EditState.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RunState.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\RaccoonGameLibrary\RGL\RGL.vcxproj">
