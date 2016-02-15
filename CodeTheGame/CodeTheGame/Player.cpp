@@ -66,12 +66,24 @@ void Player::draw()
 
 void Player::onBeginContact(rgl::Vector2 contactPosition, PhysicsObject* pPhysicsObject)
 {
-	if (pPhysicsObject != 0 && dynamic_cast<Flag*>(pPhysicsObject) && !m_levelComplete)
+	if (pPhysicsObject != 0 && !m_levelComplete)
 	{
-		m_levelComplete = true;
-		m_pLevel->addObject(std::make_shared<LevelPassed>(464, 55, m_currentLevel + 1, "LevelPassedObject"));
-		rgl::SoundManager::get()->playSound("FlagHit", 0);
+		if (dynamic_cast<Flag*>(pPhysicsObject))
+		{
+			m_levelComplete = true;
+			m_pLevel->addObject(std::make_shared<LevelPassed>(464, 55, m_currentLevel + 1, "LevelPassedObject"));
+			rgl::SoundManager::get()->playSound("FlagHit", 0);
+		}
+		else
+		{
+			m_collidingObjects.push_back(pPhysicsObject);
+		}
 	}
+}
+
+void Player::onEndContact(rgl::Vector2 contactPosition, PhysicsObject* pPhysicsObject)
+{
+	std::remove(m_collidingObjects.begin(), m_collidingObjects.end(), pPhysicsObject);
 }
 
 void Player::registerPythonClass()
@@ -79,8 +91,10 @@ void Player::registerPythonClass()
 	rpl::Interpreter::get()->registerClass("Player",
 		boost::python::class_<Player>("Player", boost::python::no_init)
 		.def("setDirection", &Player::pySetDirection)
+		.def("getDirection", &Player::pyGetDirection)
 		.def("jump", &Player::pyJump)
-		.def("relativeBlockAt", &Player::pyRelativeBlockAt));
+		.def("relativeBlockAt", &Player::pyRelativeBlockAt)
+		.def("relativeObjectAt", &Player::pyIsCollidingWithObject));
 }
 
 void Player::pySetDirection(std::string direction)
@@ -89,6 +103,11 @@ void Player::pySetDirection(std::string direction)
 		setState(WALKING, LEFT);
 	else if (direction == "RIGHT")
 		setState(WALKING, RIGHT);
+}
+
+std::string Player::pyGetDirection()
+{
+	return m_currentDirection == LEFT ? "LEFT" : "RIGHT";
 }
 
 void Player::pyJump()
@@ -104,6 +123,11 @@ bool Player::pyRelativeBlockAt(int relative_x, int relative_y)
 {
 	return m_pLevel->isTileAt((int)m_pLevel->toTileUnits(m_x + relative_x * m_pLevel->getTileSize() + m_pLevel->getTileSize() / 2),
 		(int)m_pLevel->toTileUnits(m_y + relative_y * m_pLevel->getTileSize() + m_pLevel->getTileSize() / 2));
+}
+
+bool Player::pyIsCollidingWithObject()
+{
+	return m_collidingObjects.size() > 0;
 }
 
 void Player::setState(PlayerState state, PlayerDirection direction)

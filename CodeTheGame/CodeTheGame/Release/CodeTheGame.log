@@ -1,11 +1,11 @@
-﻿  EditState.cpp
+﻿  Player.cpp
   NOTE: Use of this header (ice_or.hpp) is deprecated
   NOTE: Use of this header (ice_and.hpp) is deprecated
   NOTE: Use of this header (ice_not.hpp) is deprecated
   NOTE: Use of this header (ice_eq.hpp) is deprecated
   Generating code
-  0 of 4750 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+  178 of 4906 functions ( 3.6%) were compiled, the rest were copied from previous compilation.
+    156 functions were new in current compilation
+    166 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   CodeTheGame.vcxproj -> C:\CodeTheGame\CodeTheGame\Release\CodeTheGame.exe
