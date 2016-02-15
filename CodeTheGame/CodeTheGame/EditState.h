@@ -14,6 +14,8 @@ private:
 	std::string m_levelPath;
 	std::string m_levelFile;
 
+	std::string loadScript(std::string filename);
+
 	void onRunButton();
 	void onBackButton();
 

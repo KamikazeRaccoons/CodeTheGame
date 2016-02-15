@@ -19,5 +19,9 @@ public:
 	void advanceLevel();
 	void setLevel(int levelNumber);
 
+	int getCurrentLevel();
+	std::string getLevelName(int levelNumber);
+	std::string getLevelPath(int levelNumber);
+
 };
 

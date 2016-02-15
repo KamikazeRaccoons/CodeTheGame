@@ -7,8 +7,8 @@
 
 void RunState::onEnter()
 {
-	m_initScript = rgl::FileIO::readFile("assets/scripts/init.py");
-	m_updateScript = rgl::FileIO::readFile("assets/scripts/update.py");
+	m_initScript = rgl::FileIO::readFile(m_levelPath + "scripts/init.py");
+	m_updateScript = rgl::FileIO::readFile(m_levelPath + "scripts/update.py");
 
 	if (!rpl::Interpreter::get()->initialize())
 	{

@@ -19,8 +19,8 @@ void LevelManager::advanceLevel()
 
 void LevelManager::setLevel(int levelNumber)
 {
-	std::string levelName = "level" + std::to_string(levelNumber);
-	std::string levelPath = "assets/levels/" + levelName + "/";
+	std::string levelName = getLevelName(levelNumber);
+	std::string levelPath = getLevelPath(levelNumber);
 
 	if (rgl::FileIO::fileExists(levelPath + levelName + ".tmx"))
 	{
@@ -32,4 +32,19 @@ void LevelManager::setLevel(int levelNumber)
 		rgl::Game::get()->getGameStateMachine()->changeState(std::make_shared<MainMenu>());
 		m_currentLevel = 0;
 	}
+}
+
+int LevelManager::getCurrentLevel()
+{
+	return m_currentLevel;
+}
+
+std::string LevelManager::getLevelName(int levelNumber)
+{
+	return "level" + std::to_string(levelNumber);
+}
+
+std::string LevelManager::getLevelPath(int levelNumber)
+{
+	return "assets/levels/" + getLevelName(levelNumber) + "/";
 }
