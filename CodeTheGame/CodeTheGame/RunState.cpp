@@ -18,7 +18,7 @@ void RunState::onEnter()
 
 	Player::registerPythonClass();
 
-	m_pLevel = rgl::LevelParser::parseLevel("assets/levels/level" + std::to_string(m_levelNumber) + "/", "level" + std::to_string(m_levelNumber) + ".tmx");
+	m_pLevel = rgl::LevelParser::parseLevel(m_levelPath, m_levelFile);
 
 	m_pLevel->addObject(std::make_shared<rgl::Button>(544, 384, 64, 32, "CancelButton", 0, "CancelButton"));
 	m_pLevel->addObject(std::make_shared<rgl::Button>(544, 32, 64, 32, "BackButton", 1, "BackButton"));
@@ -59,7 +59,7 @@ std::string RunState::getStateID() const
 
 void RunState::onCancelButton()
 {
-	rgl::Game::get()->getGameStateMachine()->changeState(std::make_shared<EditState>(m_levelNumber));
+	rgl::Game::get()->getGameStateMachine()->changeState(std::make_shared<EditState>(m_levelPath, m_levelFile));
 	rgl::SoundManager::get()->playSound("MenuBoop", 0);
 }
 

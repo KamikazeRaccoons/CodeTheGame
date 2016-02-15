@@ -1,0 +1,1 @@
+player.setDirection("RIGHT")

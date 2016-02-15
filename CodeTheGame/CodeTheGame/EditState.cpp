@@ -7,7 +7,7 @@
 
 void EditState::onEnter()
 {
-	m_pLevel = rgl::LevelParser::parseLevel("assets/levels/level" + std::to_string(m_levelNumber) + "/", "level" + std::to_string(m_levelNumber) + ".tmx");
+	m_pLevel = rgl::LevelParser::parseLevel(m_levelPath, m_levelFile);
 
 	m_pLevel->addObject(std::make_shared<rgl::Button>(544, 384, 64, 32, "RunButton", 0, "RunButton"));
 	m_pLevel->addObject(std::make_shared<rgl::Button>(544, 32, 64, 32, "BackButton", 1, "BackButton"));
@@ -53,7 +53,7 @@ void EditState::onRunButton()
 	rgl::FileIO::writeFile("assets/scripts/init.py", m_pInitTextBox->getText());
 	rgl::FileIO::writeFile("assets/scripts/update.py", m_pUpdateTextBox->getText());
 
-	rgl::Game::get()->getGameStateMachine()->changeState(std::make_shared<RunState>(m_levelNumber));
+	rgl::Game::get()->getGameStateMachine()->changeState(std::make_shared<RunState>(m_levelPath, m_levelFile));
 
 	rgl::SoundManager::get()->playSound("MenuBoop", 0);
 }

@@ -11,14 +11,15 @@ private:
 	std::shared_ptr<rgl::TextBox> m_pInitTextBox;
 	std::shared_ptr<rgl::TextBox> m_pUpdateTextBox;
 
-	int m_levelNumber;
+	std::string m_levelPath;
+	std::string m_levelFile;
 
 	void onRunButton();
 	void onBackButton();
 
 public:
 
-	EditState(int levelNumber) : m_levelNumber(levelNumber) { }
+	EditState(std::string levelPath, std::string levelFile) : m_levelPath(levelPath), m_levelFile(levelFile) { }
 
 	virtual void onEnter();
 	virtual void onExit();

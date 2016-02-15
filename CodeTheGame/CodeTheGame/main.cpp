@@ -8,7 +8,7 @@
 
 int main(int argc, char** argv)
 {
-	if (!rgl::Game::get()->init("Code: THE_GAME();", 640, 480, false, true))
+	if (!rgl::Game::get()->init("Code: THE_GAME();", 640, 480, false, false))
 	{
 		rgl::Debugger::get()->log("Could not run game.", rgl::Debugger::FATAL_ERROR);
 		return 1;
