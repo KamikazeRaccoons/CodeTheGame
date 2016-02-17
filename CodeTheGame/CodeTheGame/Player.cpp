@@ -69,7 +69,7 @@ void Player::onBeginContact(rgl::Vector2 contactPosition, PhysicsObject* pPhysic
 	if (pPhysicsObject != 0 && dynamic_cast<Flag*>(pPhysicsObject) && !m_levelComplete)
 	{
 		m_levelComplete = true;
-		m_pLevel->addObject(std::make_shared<LevelPassed>(464, 55, m_currentLevel + 1, "LevelPassedObject"));
+		m_pLevel->addObject(std::make_shared<LevelPassed>(464, 55, "LevelPassedObject"));
 		rgl::SoundManager::get()->playSound("FlagHit", 0);
 	}
 }
@@ -93,7 +93,7 @@ void Player::pySetDirection(std::string direction)
 
 void Player::pyJump()
 {
-	if (m_pLevel->isTileAt((int)m_pLevel->toTileUnits(m_x), (int)m_pLevel->toTileUnits(m_y + 1) + 1))
+	if (m_pLevel->isTileAt((int)m_pLevel->toTileUnits(m_x), (int)m_pLevel->toTileUnits(m_y + 1) + 1, true))
 	{
 		m_pBody->SetLinearVelocity(b2Vec2(m_pBody->GetLinearVelocity().x, -12.0f));
 		rgl::SoundManager::get()->playSound("PlayerJump", 0);
@@ -103,7 +103,7 @@ void Player::pyJump()
 bool Player::pyRelativeBlockAt(int relative_x, int relative_y)
 {
 	return m_pLevel->isTileAt((int)m_pLevel->toTileUnits(m_x + relative_x * m_pLevel->getTileSize() + m_pLevel->getTileSize() / 2),
-		(int)m_pLevel->toTileUnits(m_y + relative_y * m_pLevel->getTileSize() + m_pLevel->getTileSize() / 2));
+		(int)m_pLevel->toTileUnits(m_y + relative_y * m_pLevel->getTileSize() + m_pLevel->getTileSize() / 2), true);
 }
 
 void Player::setState(PlayerState state, PlayerDirection direction)

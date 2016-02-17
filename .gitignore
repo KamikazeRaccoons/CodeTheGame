@@ -1,31 +1,33 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+#################
+## Eclipse
+#################
 
-# Precompiled Headers
-*.gch
-*.pch
+*.pydevproject
+.project
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# External tool builders
+.externalToolBuilders/
 
-# Fortran module files
-*.mod
+# Locally stored "Eclipse launch configurations"
+*.launch
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+# CDT-specific
+.cproject
 
-# Executables
-*.exe
-*.out
-*.app
+# PDT-specific
+.buildpath
+
 
 #################
 ## Visual Studio
@@ -81,8 +83,11 @@ ipch/
 *.aps
 *.ncb
 *.opensdf
+*.opendb
 *.sdf
 *.cachefile
+*.cache
+*.tlog
 
 # Visual Studio profiler
 *.psess
@@ -163,3 +168,57 @@ UpgradeLog*.htm
 # SQL Server files
 App_Data/*.mdf
 App_Data/*.ldf
+
+#############
+## Windows detritus
+#############
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Mac crap
+.DS_Store
+
+
+#############
+## Python
+#############
+
+*.py[cod]
+
+# Packages
+*.egg
+*.egg-info
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+
+#Translations
+*.mo
+
+#Mr Developer
+.mr.developer.cfg
+*.tlog
+*.cache
+*.iobj
+*.suo
+*.py

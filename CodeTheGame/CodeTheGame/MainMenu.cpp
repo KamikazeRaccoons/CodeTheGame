@@ -1,5 +1,5 @@
 #include "MainMenu.h"
-#include "EditState.h"
+#include "LevelManager.h"
 
 void MainMenu::onEnter()
 {
@@ -34,7 +34,7 @@ std::string MainMenu::getStateID() const
 
 void MainMenu::onPlayButton()
 {
-	rgl::Game::get()->getGameStateMachine()->changeState(std::make_shared<EditState>(1));
+	LevelManager::get()->setLevel(1);
 	rgl::SoundManager::get()->playSound("MenuBoop", 0);
 }
 

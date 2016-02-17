@@ -155,6 +155,7 @@
     <ClCompile Include="EditState.cpp" />
     <ClCompile Include="Flag.cpp" />
     <ClCompile Include="Label.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="LevelPassed.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="EditState.h" />
     <ClInclude Include="Flag.h" />
     <ClInclude Include="Label.h" />
+    <ClInclude Include="LevelManager.h" />
     <ClInclude Include="LevelPassed.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Player.h" />
