@@ -4,6 +4,7 @@
 #include "MainMenu.h"
 #include "RunState.h"
 #include "LevelManager.h"
+#include "ScriptEditor.h"
 #include <RPL.h>
 
 void EditState::onEnter()
@@ -13,8 +14,8 @@ void EditState::onEnter()
 	m_pLevel->addObject(std::make_shared<rgl::Button>(544, 384, 64, 32, "RunButton", 0, "RunButton"));
 	m_pLevel->addObject(std::make_shared<rgl::Button>(544, 32, 64, 32, "BackButton", 1, "BackButton"));
 
-	m_pLevel->addObject(m_pInitTextBox = std::make_shared<rgl::TextBox>(false, 0, 0, 384, 224, 127, 127, 127, 191, "Consola", "InitEditor"));
-	m_pLevel->addObject(m_pUpdateTextBox = std::make_shared<rgl::TextBox>(false, 0, 256, 384, 224, 127, 127, 127, 191, "Consola", "UpdateEditor"));
+	m_pLevel->addObject(m_pInitTextBox = std::make_shared<ScriptEditor>(false, 0, 0, 384, 224, "InitEditor"));
+	m_pLevel->addObject(m_pUpdateTextBox = std::make_shared<ScriptEditor>(false, 0, 256, 384, 224, "UpdateEditor"));
 
 	m_pInitTextBox->setText(loadScript("scripts/init.py"));
 	m_pUpdateTextBox->setText(loadScript("scripts/update.py"));

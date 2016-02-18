@@ -1,25 +1,6 @@
-﻿  Player.cpp
+﻿  RunState.cpp
   NOTE: Use of this header (ice_or.hpp) is deprecated
   NOTE: Use of this header (ice_and.hpp) is deprecated
   NOTE: Use of this header (ice_not.hpp) is deprecated
   NOTE: Use of this header (ice_eq.hpp) is deprecated
-  MainMenu.cpp
-  main.cpp
-  NOTE: Use of this header (ice_or.hpp) is deprecated
-  NOTE: Use of this header (ice_and.hpp) is deprecated
-  NOTE: Use of this header (ice_not.hpp) is deprecated
-  NOTE: Use of this header (ice_eq.hpp) is deprecated
-  Level1.cpp
-  NOTE: Use of this header (ice_or.hpp) is deprecated
-  NOTE: Use of this header (ice_and.hpp) is deprecated
-  NOTE: Use of this header (ice_not.hpp) is deprecated
-  NOTE: Use of this header (ice_eq.hpp) is deprecated
-  Generating Code...
-  RPL.lib(Interpreter.obj) : MSIL .netmodule or module compiled with /GL found; restarting link with /LTCG; add /LTCG to the link command line to improve linker performance
-LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/LTCG' specification
-Level1.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
-RPL.lib(Interpreter.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in Level1.obj
-RPL.lib(Interpreter.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in Level1.obj
-RGL.lib(Game.obj) : error LNK2005: "private: static class rgl::Game * rgl::Game::m_pInstance" (?m_pInstance@Game@rgl@@0PAV12@A) already defined in RGL.lib(Game.obj)
-RPL.lib(Interpreter.obj) : error LNK2005: "private: static class rpl::Interpreter * rpl::Interpreter::m_pInstance" (?m_pInstance@Interpreter@rpl@@0PAV12@A) already defined in RPL.lib(Interpreter.obj)
-LINK : fatal error LNK1104: cannot open file 'python35_d.lib'
+  CodeTheGame.vcxproj -> C:\CodeTheGame\CodeTheGame\Debug\CodeTheGame.exe
