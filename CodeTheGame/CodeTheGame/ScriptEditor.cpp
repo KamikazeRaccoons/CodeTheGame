@@ -14,7 +14,7 @@ void ScriptEditor::update()
 		else
 			m_enabled = false;
 	}
-
+	
 	if (m_enabled)
 	{
 		m_fa = 255;

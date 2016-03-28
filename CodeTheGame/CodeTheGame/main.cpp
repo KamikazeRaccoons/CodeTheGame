@@ -8,14 +8,14 @@
 
 int main(int argc, char** argv)
 {
-	if (!rgl::Game::get()->init("Code: THE_GAME();", 640, 480, false, true))
+	if (!rgl::Game::get()->init("Code: THE_GAME();", 640, 480, false, false))
 	{
 		rgl::Debugger::get()->log("Could not run game.", rgl::Debugger::FATAL_ERROR);
 		return 1;
 	}
 	
-	rgl::FontManager::get()->load("assets/fonts/segoeuil.ttf", 12, "Segoe");
-	rgl::FontManager::get()->load("assets/fonts/consola.ttf", 12, "Consola");
+	rgl::FontManager::get()->loadFont("assets/fonts/segoeuil.ttf", 12, "Segoe");
+	rgl::FontManager::get()->loadFont("assets/fonts/consola.ttf", 12, "Consola");
 
 	rgl::SoundManager::get()->load("assets/sounds/Error.mp3", "Error", rgl::SoundManager::SFX);
 	rgl::SoundManager::get()->load("assets/sounds/Flag_Hit.mp3", "FlagHit", rgl::SoundManager::SFX);

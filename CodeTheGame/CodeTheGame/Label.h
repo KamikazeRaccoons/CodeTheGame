@@ -19,9 +19,6 @@ public:
 	Label(int x, int y, int width, int height, std::string textureID, std::string name = "(unnamed Label)")
 		: rgl::GameObject(name), m_x(x), m_y(y), m_width(width), m_height(height), m_textureID(textureID) { }
 
-	virtual void onCreate() { }
-	virtual void onDestroy() { }
-
 	virtual void update() { }
 	virtual void draw();
 
