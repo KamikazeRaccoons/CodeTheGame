@@ -6,13 +6,16 @@ void ScriptEditor::update()
 	{
 		std::shared_ptr<rgl::Vector2> pMousePos = rgl::InputHandler::get()->getMousePosition();
 
-		if (pMousePos->getX() < (m_x + m_width) &&
+		bool shouldBeEnabled = pMousePos->getX() < (m_x + m_width) &&
 			pMousePos->getX() >= m_x &&
 			pMousePos->getY() < (m_y + m_height) &&
-			pMousePos->getY() >= m_y)
-			m_enabled = true;
-		else
-			m_enabled = false;
+			pMousePos->getY() >= m_y ? true : false;
+		
+		if (m_enabled != shouldBeEnabled)
+		{
+			m_enabled = shouldBeEnabled;
+			invalidate();
+		}
 	}
 	
 	if (m_enabled)
